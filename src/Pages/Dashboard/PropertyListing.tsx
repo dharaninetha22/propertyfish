@@ -1,401 +1,208 @@
-import { useState } from "react";
-
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import FilterSidebar from "./FilterSidebar";
+import PropertyCard from "./PropertyCard";
+// import ListingTopbar from "./ListingTopbar";
 
-interface ListingTopbarProps {
-  viewMode: "list" | "map";
+import { Slider } from "../../assets";
+import MapView from "./MapView";
+import ListingTopbar from "./ListingTopbar";
 
-  setViewMode: (
-    mode: "list" | "map"
-  ) => void;
-}
 
-const ListingTopbar = ({
-  viewMode,
-  setViewMode,
-}: ListingTopbarProps) => {
-  const [sortBy, setSortBy] =
-    useState("Relevance");
 
+const properties = [
+  {
+    id: 1,
+    title: "2 BHK Independent Builder Floor",
+    price: "₹20,000",
+    location: "Sector 2, Noida",
+    bathroom: "2",
+    parking: "Available",
+     images: [
+      Slider.slider1,
+      Slider.slider2,
+      Slider.slider3,
+    
+    ],
+    description:
+      "3bhk excellent build builder’s flat Carpet area is 120 sq yards (1150 sq ft) 3 bed rooms with drawing...",
+    highlights: [
+      "24 Hour Concierge",
+      "24x7 Security",
+      "Close to Market",
+      "Close to Mall",
+    ],
+  },
+
+  {
+    id: 2,
+    title: "3 BHK Luxury Apartment",
+    price: "₹35,000",
+    location: "Sector 2, Noida",
+    bathroom: "3",
+    parking: "Available",
+ images: [
+      Slider.slider4,
+      Slider.slider2,
+      Slider.slider3,
+    
+    ],
+    description:
+      "Luxury apartment with premium amenities and modern architecture...",
+    highlights: [
+      "Club House",
+      "Swimming Pool",
+      "Gym",
+      "Children Park",
+    ],
+  },
+    {
+    id: 3,
+    title: "3 BHK Luxury Apartment",
+    price: "₹35,000",
+    location: "Sector 2, Noida",
+    bathroom: "3",
+    parking: "Available",
+      images: [
+      Slider.slider3,
+      Slider.slider4,
+      Slider.slider2,
+    
+    ],
+    description:
+      "Luxury apartment with premium amenities and modern architecture...",
+    highlights: [
+      "Club House",
+      "Swimming Pool",
+      "Gym",
+      "Children Park",
+    ],
+  },
+    {
+    id:4 ,
+    title: "3 BHK Luxury Apartment",
+    price: "₹35,000",
+    location: "Sector 2, Noida",
+    bathroom: "3",
+    parking: "Available",
+      images: [
+      Slider.slider4,
+      Slider.slider2,
+      Slider.slider3,
+    
+    ],
+    description:
+      "Luxury apartment with premium amenities and modern architecture...",
+    highlights: [
+      "Club House",
+      "Swimming Pool",
+      "Gym",
+      "Children Park",
+    ],
+  },
+];
+
+const PropertyListing = ({ viewMode, setViewMode }: { viewMode: "list" | "map"; setViewMode: (mode: "list" | "map") => void }) => {
   return (
     <Box
       sx={{
-        background: "#fff",
-
-        borderRadius: "16px",
-
-        p: {
-          xs: 2,
-          md: 3,
-        },
-
-        display: "flex",
-
-        justifyContent:
-          "space-between",
-
-        alignItems: {
-          xs: "flex-start",
-          md: "center",
-        },
-
-        flexDirection: {
-          xs: "column",
-          md: "row",
-        },
-
-        gap: {
-          xs: 3,
-          md: 0,
-        },
+        background: "#f5f5f5",
+        minHeight: "100vh",
+        px:{xs: 2, md: 4},
       }}
     >
-      {/* LEFT */}
+      {/* MAIN CONTENT WRAPPER */}
       <Box
         sx={{
-          width: "100%",
+          display: "flex",
+          gap: 3,
+          p: {xs:"auto", md: 3},
+          maxWidth: "1600px",
+          margin: "0 auto",
+           flexDirection: {
+      xs: "column",
+      md: "row",
+    },
         }}
       >
-        <Typography
-          variant="body2"
-          sx={{
-            color: "#666",
+        {/* LEFT FILTER - STICKY */}
+        {/* LEFT SIDEBAR */}
+{/* LEFT SIDEBAR */}
+<Box
+  sx={{
+    width: {
+      xs: "100%",
+      md: "400px",
+    },
 
-            fontSize: {
-              xs: "12px",
-              md: "14px",
-            },
-          }}
-        >
-          Home/New Delhi/ Flats for
-          sale in Dwarka Mor, New
-          Delhi
-        </Typography>
+    flexShrink: 0,
 
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 2,
+    /* MOBILE */
+    position: {
+      xs: "relative",
+      md: "sticky",
+    },
 
-            fontWeight: 800,
+    top: {
+      md: 0,
+    },
 
-            fontSize: {
-              xs: "24px",
-              md: "28px",
-            },
-          }}
-        >
-          Showing 1 - 30{" "}
+    height: {
+      xs: "auto",
+      md: "100vh",
+    },
 
-          <span
-            style={{
-              color: "#666",
+    overflowY: {
+      xs: "visible",
+      md: "auto",
+    },
 
-              fontWeight: 400,
+    alignSelf: {
+      md: "flex-start",
+    },
 
-              fontSize: "14px",
-            }}
-          >
-            of 1581
-          </span>
-        </Typography>
+    scrollbarWidth: "none",
 
-        <Typography
-          variant="body2"
-          sx={{
-            mt: 1,
+    msOverflowStyle: "none",
 
-            color: "#444",
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
+  }}
+>
+  <FilterSidebar />
+</Box>
 
-            fontSize: {
-              xs: "13px",
-              md: "14px",
-            },
-          }}
-        >
-          Flats for Sale in Dwarka
-          Mor, New Delhi
-        </Typography>
-      </Box>
-
-      {/* RIGHT */}
-      <Box
-        sx={{
-          width: {
-            xs: "100%",
-            md: "auto",
-          },
-        }}
-      >
-        <Typography
-          variant="body2"
-          sx={{
-            color: "#666",
-
-            textAlign: {
-              xs: "left",
-              md: "right",
-            },
-
-            mb: 2,
-          }}
-        >
-          Last Updated: Aug 9, 2023
-        </Typography>
-
+        {/* RIGHT CARDS */}
         <Box
           sx={{
+            flex: 1,
             display: "flex",
-
-            alignItems: {
-              xs: "stretch",
-              md: "center",
-            },
-
-            flexDirection: {
-              xs: "column",
-              sm: "row",
-            },
-
-            gap: 2,
+            flexDirection: "column",
+            gap: 3,
+            minWidth: 0,
           }}
         >
-          {/* SORT */}
-          <Box
-            sx={{
-              display: "flex",
+          <ListingTopbar  />
 
-              alignItems: "center",
-
-              gap: 1.5,
-            }}
-          >
-            <Typography
-              variant="body2"
-              sx={{
-                fontWeight: 700,
-
-                color: "#222",
-              }}
-            >
-              Sort by :
-            </Typography>
-
-            <Select
-              value={sortBy}
-              onChange={(e) =>
-                setSortBy(
-                  e.target.value as string
-                )
-              }
-              sx={{
-                width: {
-                  xs: "100%",
-                  sm: "180px",
-                },
-
-                height: "42px",
-
-                borderRadius:
-                  "10px",
-
-                background: "#fff",
-
-                "& .MuiOutlinedInput-notchedOutline":
-                  {
-                    borderColor:
-                      "#ddd",
-                  },
-
-                "& .MuiSelect-select":
-                  {
-                    display: "flex",
-
-                    alignItems:
-                      "center",
-
-                    justifyContent:
-                      "center",
-
-                    fontSize:
-                      "14px",
-
-                    fontWeight:
-                      500,
-                  },
-              }}
-            >
-              <MenuItem value="Relevance">
-                Relevance
-              </MenuItem>
-
-              <MenuItem value="Low to High">
-                Low to High
-              </MenuItem>
-
-              <MenuItem value="High to Low">
-                High to Low
-              </MenuItem>
-            </Select>
-          </Box>
-
-          {/* LIST MAP TOGGLE */}
-          <Box
-            sx={{
-              width: {
-                xs: "100%",
-                sm: "180px",
-              },
-
-              height: "48px",
-
-              background:
-                "#f5f5f5",
-
-              borderRadius:
-                "14px",
-
-              p: "4px",
-
-              display: "flex",
-            }}
-          >
-            {/* LIST */}
-            <Box
-              onClick={() =>
-                setViewMode("list")
-              }
-              sx={{
-                flex: 1,
-
-                borderRadius:
-                  "10px",
-
-                background:
-                  viewMode ===
-                  "list"
-                    ? "#ff9800"
-                    : "transparent",
-
-                display: "flex",
-
-                alignItems:
-                  "center",
-
-                justifyContent:
-                  "center",
-
-                gap: 1,
-
-                cursor:
-                  "pointer",
-
-                transition:
-                  "0.3s",
-              }}
-            >
-              <FormatListBulletedIcon
-                sx={{
-                  fontSize:
-                    "18px",
-
-                  color:
-                    viewMode ===
-                    "list"
-                      ? "#fff"
-                      : "#666",
-                }}
-              />
-
-              <Typography
-                variant="body2"
-                sx={{
-                  fontWeight: 600,
-
-                  color:
-                    viewMode ===
-                    "list"
-                      ? "#fff"
-                      : "#666",
-                }}
-              >
-                List
-              </Typography>
-            </Box>
-
-            {/* MAP */}
-            <Box
-              onClick={() =>
-                setViewMode("map")
-              }
-              sx={{
-                flex: 1,
-
-                borderRadius:
-                  "10px",
-
-                background:
-                  viewMode ===
-                  "map"
-                    ? "#ff9800"
-                    : "transparent",
-
-                display: "flex",
-
-                alignItems:
-                  "center",
-
-                justifyContent:
-                  "center",
-
-                gap: 1,
-
-                cursor:
-                  "pointer",
-
-                transition:
-                  "0.3s",
-              }}
-            >
-              <MapOutlinedIcon
-                sx={{
-                  fontSize:
-                    "18px",
-
-                  color:
-                    viewMode ===
-                    "map"
-                      ? "#fff"
-                      : "#666",
-                }}
-              />
-
-              <Typography
-                variant="body2"
-                sx={{
-                  fontWeight: 600,
-
-                  color:
-                    viewMode ===
-                    "map"
-                      ? "#fff"
-                      : "#666",
-                }}
-              >
-                Map
-              </Typography>
-            </Box>
-          </Box>
+          {/* CONDITIONAL RENDERING */}
+          {viewMode === "list" ? (
+            <>
+              {/* PROPERTY CARDS */}
+              {properties.map((property) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                />
+              ))}
+            </>
+          ) : (
+            <MapView />
+          )}
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default ListingTopbar;
+export default PropertyListing;
