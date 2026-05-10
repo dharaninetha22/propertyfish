@@ -102,7 +102,11 @@ const properties = [
   },
 ];
 
-const PropertyListing = ({ viewMode, setViewMode }: { viewMode: "list" | "map"; setViewMode: (mode: "list" | "map") => void }) => {
+const PropertyListing = ({
+  viewMode,
+}: {
+  viewMode: "list" | "map";
+}) => {
   return (
     <Box
       sx={{

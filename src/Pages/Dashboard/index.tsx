@@ -12,7 +12,7 @@ const index = () => {
   return (
     <Box>
       <PropertyFilter viewMode={viewMode} setViewMode={setViewMode} />
-      <PropertyListing viewMode={viewMode} setViewMode={setViewMode} />
+      <PropertyListing viewMode={viewMode} />
       <PropertyBanner />
       <PropertyTabs />
     </Box>
